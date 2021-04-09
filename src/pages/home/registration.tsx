@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
-import { useUserReducer } from "../../hooks/useUserReducer";
 import { useHistory } from 'react-router-dom';
+import { UserContext } from '../../routing'
 
 export const Registration = () => {
+    // eslint-disable-next-line
+  const { user, userDispatch } = useContext(UserContext)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  // eslint-disable-next-line
-  const [user, userDispatch] = useUserReducer()
   const history = useHistory();
 
   const handleSubmit = async (e: any) => {

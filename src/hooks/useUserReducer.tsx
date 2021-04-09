@@ -1,6 +1,6 @@
 import { useReducer } from 'react'
 
-interface dataAction {
+export interface dataAction {
   type: "registration" | "sign_in",
   payload: {
     email?: string,
@@ -9,7 +9,7 @@ interface dataAction {
     uid?: string,
   }
 }
-interface User {
+export interface User {
   email: string,
   accessToken: string,
   client: string,

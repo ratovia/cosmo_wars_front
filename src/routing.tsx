@@ -1,22 +1,32 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { createContext, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { useUserReducer } from "./hooks/useUserReducer";
+import { User, dataAction, useUserReducer } from "./hooks/useUserReducer";
 import { Home } from "./pages/home";
 import { Lobby } from "./pages/home/lobby";
 import { Login } from "./pages/home/login";
 import { Registration } from "./pages/home/registration";
+
+type userContextType = {
+  user: User;
+  userDispatch: ({ type, payload }: dataAction) => void;
+};
+
+export const UserContext = createContext<userContextType>(
+  {} as userContextType
+);
 
 const Routing = () => {
   const [user, userDispatch] = useUserReducer()
   useEffect(() => {
     checkLoginStatus()
     // eslint-disable-next-line
-  },[])
+  }, [])
 
   useEffect(() => {
     console.log(user)
-  },[user])
+  }, [user])
+
   const checkLoginStatus = async () => {
     const localObj = localStorage.getItem('auth')
     const authObj = localObj && JSON.parse(localObj);
@@ -44,12 +54,14 @@ const Routing = () => {
     });
   }
   return (
-    <Router>
-      <Route exact path="/" component={Home}></Route>
-      <Route path="/login" component={Login}></Route>
-      <Route path="/registration" component={Registration}></Route>
-      <Route path="/lobby" component={Lobby}></Route>
-    </Router>
+    <UserContext.Provider value={{user, userDispatch}}>
+      <Router>
+        <Route exact path="/" component={Home}></Route>
+        <Route path="/login" component={Login}></Route>
+        <Route path="/registration" component={Registration}></Route>
+        <Route path="/lobby" component={Lobby}></Route>
+      </Router>
+    </UserContext.Provider>
   );
 }
 
