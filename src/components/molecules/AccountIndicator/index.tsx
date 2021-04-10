@@ -49,12 +49,12 @@ export const AccountIndicator = (props: Props) => {
           id="menu-appbar"
           anchorEl={anchorEl}
           anchorOrigin={{
-            vertical: "top",
-            horizontal: "right",
+            vertical: "bottom",
+            horizontal: "left",
           }}
           keepMounted
           transformOrigin={{
-            vertical: "top",
+            vertical: "bottom",
             horizontal: "right",
           }}
           open={isOpen}

@@ -1,7 +1,8 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../../routing";
+import { UserForm } from "../../components/organisms/UserForm";
 
 export const Registration = () => {
   // eslint-disable-next-line
@@ -38,27 +39,13 @@ export const Registration = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        ></input>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
-        <input
-          type="password"
-          name="password_confirmation"
-          value={passwordConfirmation}
-          onChange={(e) => setPasswordConfirmation(e.target.value)}
-        ></input>
-        <input type="submit"></input>
-      </form>
+      <UserForm
+        variant="sign_up"
+        handleEmail={setEmail}
+        handlePassword={setPassword}
+        handlePasswordConfirmation={setPasswordConfirmation}
+        handleSubmit={handleSubmit}
+      ></UserForm>
     </div>
   );
 };
