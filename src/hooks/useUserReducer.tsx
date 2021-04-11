@@ -49,6 +49,14 @@ export const useUserReducer = (): [
           authenticated: (true as boolean) || state.authenticated,
         };
       case "sign_in":
+        localStorage.setItem(
+          "auth",
+          JSON.stringify({
+            accessToken: action.payload.accessToken || state.accessToken,
+            client: action.payload.client || state.client,
+            uid: action.payload.uid || state.uid,
+          })
+        );
         return {
           ...state,
           email: action.payload.email || state.email,
